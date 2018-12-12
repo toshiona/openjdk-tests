@@ -3223,7 +3223,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3248,7 +3248,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3273,7 +3273,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3299,7 +3299,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3325,7 +3325,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	<test>
 		<testCaseName>DaaLoadTest_daa1_ConcurrentScavenge</testCaseName>
@@ -3350,7 +3350,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3376,7 +3376,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3402,7 +3402,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3427,7 +3427,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 	</test>
 	
 	<test>
@@ -3452,7 +3452,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 		<disabled>AdoptOpenJDK/openjdk-systemtest/issues/75</disabled>
 	</test>
 	
@@ -3478,7 +3478,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 		<disabled>AdoptOpenJDK/openjdk-systemtest/issues/78</disabled>
 	</test>
 	
@@ -3504,7 +3504,7 @@
 		<impls>
 			<impl>openj9</impl>
 		</impls>
-		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win</platformRequirements>
+		<platformRequirements>bits.64,^arch.ppc,^arch.arm,^os.win,^os.osx</platformRequirements>
 		<disabled>AdoptOpenJDK/openjdk-systemtest/issues/64</disabled>
 	</test>
 	<!-- The above tests are to be run using concurrentScavenge on z/OS and z/Linux using OpenJ9 SDK -->
