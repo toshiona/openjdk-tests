@@ -38,25 +38,24 @@ FOR /F "usebackq" %%i IN (`%JAVA_BIN%\java CheckValidData %TEST_STRINGS%`) DO se
 cscript //nologo ChgWord.vbs TEST_STRING %TS% DefineAnnotation_org.java > DefineAnnotation.java
 cscript //nologo ChgWord.vbs TEST_STRING %TS% AnnotatedTest_org.java > AnnotatedTest.java
 
-@echo compiling... > %OUTPUT%
-%JAVA_BIN%\javac DefineAnnotation.java AnnotationProcessor.java AnnotationProcessor7.java AnnotationProcessor8.java AnnotationProcessor11.java AnnotatedTest.java
+@echo compiling...
+%JAVA_BIN%\javac DefineAnnotation.java AnnotatedTest.java SourceVersionCheck.java
 
-@echo execute javap >> %OUTPUT%
-%JAVA_BIN%\javap AnnotatedTest >> %OUTPUT%
+@echo execute javap
+%JAVA_BIN%\javap AnnotatedTest > javap.txt 2>&1
+fc javap.txt %PWD%\expected\win_%LOCALE%.def.txt > fc.txt 2>&1
+if ErrorLevel 1 (
+copy fc.txt diff.txt > nul 2>&1
+)
 
-@echo execute javac with processor option with RELEASE_6 >> %OUTPUT%
-%JAVA_BIN%\javac -processor AnnotationProcessor AnnotatedTest.java >> %OUTPUT%
+%JAVA_BIN%\java SourceVersionCheck %PWD%\expected\win_%LOCALE%.pro.txt 2>> diff.txt
 
-@echo execute javac with processor option with RELEASE_7 >> %OUTPUT%
-%JAVA_BIN%\javac -processor AnnotationProcessor7 AnnotatedTest.java >> %OUTPUT%
-
-@echo execute javac with processor option with RELEASE_8 >> %OUTPUT%
-%JAVA_BIN%\javac -processor AnnotationProcessor8 AnnotatedTest.java >> %OUTPUT%
-
-@echo execute javac with processor option with RELEASE_11 >> %OUTPUT%
-%JAVA_BIN%\javac -processor AnnotationProcessor11 AnnotatedTest.java >> %OUTPUT%
-
-fc %PWD%\expected\win_%LOCALE%.expected.txt output.txt > fc.out 2>&1
-exit %errorlevel%
-
-
+for %%F in (diff.txt) do (
+  if %%~zF==0 (
+@echo PASSED
+    exit 0
+  ) else (
+@echo FAILED
+    exit 1
+  )
+)

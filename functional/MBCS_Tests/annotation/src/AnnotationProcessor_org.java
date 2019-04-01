@@ -26,9 +26,9 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.lang.model.element.AnnotationMirror;
 
-@SupportedSourceVersion(SourceVersion.RELEASE_6)
+@SupportedSourceVersion(SourceVersion.%%VERSION%%)
 @SupportedAnnotationTypes("*")
-public class AnnotationProcessor extends AbstractProcessor
+public class AnnotationProcessor_%%VERSION%% extends AbstractProcessor
 {
     @Override
     public boolean process(
@@ -37,12 +37,12 @@ public class AnnotationProcessor extends AbstractProcessor
        ArrayList<String> list= new ArrayList<String>();
        for(TypeElement annotation : annotations) {
           for(Element element : roundEnv.getElementsAnnotatedWith(annotation)) {
-				list.add(String.format(
+                                         list.add(String.format(
                                          "annotation : "+element.getAnnotationMirrors().toString()+"%n"+
-				         "kind: "+element.getKind().toString()+"%n"+
-				         "modifier: "+element.getModifiers().toString()+"%n"+
-				         "type: "+element.asType().toString()+"%n"+
-				         "element: "+element.toString()+"%n"));
+                                         "kind: "+element.getKind().toString()+"%n"+
+                                         "modifier: "+element.getModifiers().toString()+"%n"+
+                                         "type: "+element.asType().toString()+"%n"+
+                                         "element: "+element.toString()+"%n"));
             }
         }
         Collections.sort(list);
