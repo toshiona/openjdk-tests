@@ -13,7 +13,7 @@ rem limitations under the License.
 
 SETLOCAL
 SET PWD=%~dp0
-SET OUTPUT=output.txt 
+SET OUTPUT=output.txt
 REM SET CLASSPATH=.
 FOR /F "usebackq" %%i IN (`cscript //NOLOGO %PWD%\locale.vbs`) DO SET LOCALE=%%i
 SET STATUS=UKNOWN
@@ -23,6 +23,7 @@ if not %STATUS% == OK (
     echo SKIPPED!  This testcase is designed for Japanese or Korean Windows environment. 
     exit 0
 )
+SET CP= -cp "%PWD%annotation.jar"
 
 call %PWD%\..\data\setup_%LOCALE%.bat
 if exist tmp rd /S /Q tmp
@@ -31,24 +32,24 @@ copy %PWD%\*.java tmp 2>&1 > NUL
 copy %PWD%\ChgWord.vbs tmp 2>&1 > NUL
 cd tmp
 
-%JAVA_BIN%\javac CheckValidData.java
-
-FOR /F "usebackq" %%i IN (`%JAVA_BIN%\java CheckValidData %TEST_STRINGS%`) DO set TS=%%i
+FOR /F "usebackq" %%i IN (`%JAVA_BIN%\java %CP% CheckValidData %TEST_STRINGS%`) DO set TS=%%i
 
 cscript //nologo ChgWord.vbs TEST_STRING %TS% DefineAnnotation_org.java > DefineAnnotation.java
 cscript //nologo ChgWord.vbs TEST_STRING %TS% AnnotatedTest_org.java > AnnotatedTest.java
 
+FOR /F "usebackq" %%j IN (`%JAVA_BIN%\java %CP% SDKPath`) DO set SDKPATH=%%j
+
 @echo compiling...
-%JAVA_BIN%\javac DefineAnnotation.java AnnotatedTest.java SourceVersionCheck.java
+%SDKPATH%\javac DefineAnnotation.java AnnotatedTest.java
 
 @echo execute javap
-%JAVA_BIN%\javap AnnotatedTest > javap.txt 2>&1
+%SDKPATH%\javap AnnotatedTest > javap.txt 2>&1
 fc javap.txt %PWD%\expected\win_%LOCALE%.def.txt > fc.txt 2>&1
 if ErrorLevel 1 (
 copy fc.txt diff.txt > nul 2>&1
 )
 
-%JAVA_BIN%\java SourceVersionCheck %PWD%\expected\win_%LOCALE%.pro.txt 2>> diff.txt
+%JAVA_BIN%\java %CP% SourceVersionCheck %PWD%\expected\win_%LOCALE%.pro.txt 2>> diff.txt
 
 for %%F in (diff.txt) do (
   if %%~zF==0 (

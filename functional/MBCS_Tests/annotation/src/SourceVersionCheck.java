@@ -38,15 +38,15 @@ public class SourceVersionCheck {
         final String target = "AnnotationProcessor";
         Path sourcePath = Paths.get(target+"_org.java");
         String[] expectedResults = {};
-        String javaPath="";
-        try {
-            javaPath = System.getenv("JAVA_BIN");
-        } catch(SecurityException se) {
-            se.printStackTrace();
+
+        String javaPath = System.getProperty("java.home");
+        if (javaPath.endsWith("jre")) {
+            javaPath = javaPath.substring(0, javaPath.length() - 3);
         }
-        if (javaPath.length() != 0) {
+        if (!javaPath.endsWith(File.separator)) {
             javaPath += File.separator;
         }
+        javaPath += "bin" + File.separator;
 
         try {
             expectedResults = Files.lines(Paths.get(args[0]),

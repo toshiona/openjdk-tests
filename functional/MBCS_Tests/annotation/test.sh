@@ -22,22 +22,24 @@ FULLLANG=${OS}_${LANG%.*}.${LOC}
 
 cp ${BASE}/*.java .
 
-${JAVA_BIN}/javac CheckValidData.java SourceVersionCheck.java
+CP="-cp ${BASE}/annotation.jar"
 
-TS=`${JAVA_BIN}/java CheckValidData "${TEST_STRING}"`
+TS=`${JAVA_BIN}/java ${CP} CheckValidData "${TEST_STRING}"`
 
 echo "creating source file..."
 sed "s/TEST_STRING/${TS}/g" DefineAnnotation_org.java > DefineAnnotation.java
 sed "s/TEST_STRING/${TS}/g"  AnnotatedTest_org.java >  AnnotatedTest.java
 
+SDKPATH=`${JAVA_BIN}/java ${CP} SDKPath`
+
 echo "compiling..."
-${JAVA_BIN}/javac DefineAnnotation.java AnnotatedTest.java
+${SDKPATH}/javac DefineAnnotation.java AnnotatedTest.java
 
 echo "execute javap"
-${JAVA_BIN}/javap AnnotatedTest > javap.txt 2>&1
+${SDKPATH}/javap AnnotatedTest > javap.txt 2>&1
 diff javap.txt ${BASE}/expected/${FULLLANG}.def.txt > diff.txt
 
-${JAVA_BIN}/java SourceVersionCheck ${BASE}/expected/${FULLLANG}.pro.txt 2>> diff.txt
+${SDKPATH}/java ${CP} SourceVersionCheck ${BASE}/expected/${FULLLANG}.pro.txt 2>> diff.txt
 
 if [ -s diff.txt ]
 then
